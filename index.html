@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Edutrip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/css/lightbox.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1c1f4a;
+      --accent: #ffc400;
+      --white: #ffffff;
+      --bg: #0b0c2a;
+      --glow: #ffd700;
+      --option-bg: #1e214e;
+      --option-hover: #ffd700;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.light-mode {
+      background: #f3f3f3;
+      color: #111;
+    }
+
+    body.light-mode nav {
+      background: #ffffff;
+    }
+
+    body.light-mode nav a {
+      color: #111;
+    }
+
+    body.light-mode .hero {
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    }
+
+    body.light-mode .hero .subject-grid {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    body.light-mode .hero .subject-grid a {
+      background-color: #ddd;
+      color: #000;
+    }
+
+    body.light-mode .hero .subject-grid a:hover {
+      background-color: var(--accent);
+      color: #000;
+    }
+
+    nav {
+      background: var(--primary);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+      color: var(--accent);
+    }
+
+    .hero {
+      background: linear-gradient(145deg, #1d2352, #101126);
+      text-align: center;
+      padding: 120px 20px 160px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero h1 {
+      font-size: 3.4rem;
+      margin-bottom: 20px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 740px;
+      margin: 0 auto 40px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .subject-grid-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .hero .subject-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      z-index: 2;
+      position: relative;
+      max-width: 260px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 26px 22px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero .subject-grid a {
+      background-color: var(--option-bg);
+      padding: 12px 20px;
+      border-radius: 12px;
+      color: var(--white);
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease-in-out;
+      width: 100%;
+      text-align: center;
+    }
+
+    .hero .subject-grid a:hover {
+      background-color: var(--option-hover);
+      color: #000;
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(255, 191, 0, 0.3);
+    }
+
+    .stars, .glow-circle, .comet, .float-particle {
+      pointer-events: none;
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .stars div {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      animation: twinkle 4s infinite ease-in-out;
+      border-radius: 50%;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.8); }
+    }
+
+    .glow-circle {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      opacity: 0.12;
+      z-index: 0;
+      filter: blur(90px);
+      animation: glowMove 12s linear infinite;
+    }
+
+    @keyframes glowMove {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(20px, 30px) rotate(180deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
+    }
+
+    .comet {
+      position: absolute;
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(to right, #fff, transparent);
+      opacity: 0.5;
+      animation: cometMove 8s linear infinite;
+    }
+
+    @keyframes cometMove {
+      0% { transform: translateX(-150px) translateY(0); opacity: 0; }
+      25% { opacity: 1; }
+      100% { transform: translateX(100vw) translateY(100px); opacity: 0; }
+    }
+
+    .float-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: floatUp 6s infinite ease-in-out;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0.3; }
+      50% { transform: translateY(-20px); opacity: 1; }
+      100% { transform: translateY(0); opacity: 0.3; }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.6rem;
+      }
+      nav {
+        flex-direction: column;
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="agama.html">Agama</a>
+    <a href="pkn.html">PKn</a>
+    <a href="bahasa_indonesia.html">Bahasa Indonesia</a>
+    <a href="inggris.html">Bahasa Inggris</a>
+    <a href="ips.html">IPS</a>
+    <a href="mandarin.html">Bahasa Mandarin</a>
+    <a href="galeri.html">Galeri</a>
+    <a href="#" id="toggle-mode">🌙</a>
+  </nav>
+
+  <section class="hero">
+    <div class="stars">
+      <div style="top:10%; left:20%; animation-delay:0s"></div>
+      <div style="top:30%; left:80%; animation-delay:1s"></div>
+      <div style="top:60%; left:40%; animation-delay:2s"></div>
+      <div style="top:70%; left:60%; animation-delay:3s"></div>
+      <div style="top:50%; left:90%; animation-delay:1.5s"></div>
+      <div style="top:20%; left:10%; animation-delay:2.5s"></div>
+      <div style="top:15%; left:50%; animation-delay:1.2s"></div>
+      <div style="top:80%; left:30%; animation-delay:2.8s"></div>
+    </div>
+    <div class="glow-circle"></div>
+    <div class="comet" style="top: 40%; left: -150px; animation-delay: 0s;"></div>
+    <div class="comet" style="top: 70%; left: -200px; animation-delay: 2s;"></div>
+    <div class="float-particle" style="top: 85%; left: 25%; animation-delay: 0s;"></div>
+    <div class="float-particle" style="top: 60%; left: 70%; animation-delay: 1.5s;"></div>
+    <div class="float-particle" style="top: 40%; left: 40%; animation-delay: 2s;"></div>
+
+    <h1>Selamat Datang di Website Edutrip</h1>
+    <p>
+      Edutrip adalah kegiatan belajar di luar kelas yang memberikan pengalaman
+      baik kepada siswa untuk memperdalam materi pelajaran dan belajar hal yang baru. Selama edutrip
+      ini, kami mengunjungi berbagai tempat menarik dan mengerjakan tugas dari
+      masing-masing mata pelajaran.
+    </p>
+    <div class="subject-grid">
+      <div class="subject-grid-title">Tugas-tugas edutrip yang diberikan:</div>
+      <a href="agama.html">Agama</a>
+      <a href="pkn.html">PKn</a>
+      <a href="bahasa_indonesia.html">Bahasa Indonesia</a>
+      <a href="inggris.html">Bahasa Inggris</a>
+      <a href="ips.html">IPS</a>
+      <a href="mandarin.html">Bahasa Mandarin</a>
+    </div>
+  </section>
+
+  <!-- Musik Latar -->
+  <audio autoplay loop hidden>
+    <source src="musik/ambient.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <!-- Lightbox Example (di halaman galeri.html nanti) -->
+  <!--
+  <a href="img/foto1.jpg" data-lightbox="galeri-edutrip">
+    <img src="img/thumb1.jpg" alt="Foto 1" width="150">
+  </a>
+  -->
+
+  <!-- Scroll Reveal & Mode Gelap -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightbox2@2/dist/js/lightbox-plus-jquery.min.js"></script>
+  <script>
+    ScrollReveal().reveal('.hero h1, .hero p, .subject-grid a', {
+      delay: 200,
+      duration: 800,
+      distance: '40px',
+      origin: 'bottom',
+      easing: 'ease-out',
+      interval: 100
+    });
+
+    const toggleBtn = document.getElementById('toggle-mode');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      toggleBtn.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+    });
+  </script>
+</body>
+</html>
